@@ -42,12 +42,14 @@ class GS_Game(GameState):
 	def HandleEvent(self, event):
 
 		if (event.type == KEYDOWN):
-			if (event.key == K_SPACE):
+			if (event.key == K_UP):
 				self.mPlayer.Jump()
 			elif (event.key == K_LEFT):
 				self.mPlayer.Move("left")
 			elif (event.key == K_RIGHT):
 				self.mPlayer.Move("right")
+			elif (event.key == K_SPACE):
+				self.mPlayer.Interact()
 
 		elif (event.type == KEYUP):
 			if (event.key == K_LEFT):

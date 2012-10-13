@@ -6,6 +6,9 @@ class Entity:
 
 		self.mSharp = 0
 		self.mSolid = 0
+
+		self.mInteractable = False
+
 		self.mPosition = [0, 0]
 
 		self.mImage = None
@@ -17,6 +20,9 @@ class Entity:
 		self.mFrameWidth = 0
 		self.mAnimationSpeed = 1
 		self.mAnimationTick = 0
+
+	def Trigger(self, other):
+		return
 
 	def Position(self):
 		return self.mPosition

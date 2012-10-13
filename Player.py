@@ -60,6 +60,12 @@ class Player(Entity):
 				self.mVelocity[1] = 0
 				self.mGrounded = True
 
+	def Interact(self):
+		other = self.mLevel.EntityInRect(self.CollisionRect())
+
+		if (other):
+			other.Trigger(self)
+
 	def Update(self, delta):
 
 		startPos = self.mPosition

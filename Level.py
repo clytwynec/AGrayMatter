@@ -56,7 +56,7 @@ class Level:
 
 					entity = {
 						"name": parts[0],
-						"position": (int(parts[1]), int(parts[2]), int(parts[3]), int(parts[4]))
+						"position": (int(parts[1]), int(parts[2]))
 					}
 
 					mod = __import__(entity["name"])
@@ -72,6 +72,12 @@ class Level:
 
 	def DisplaySurface(self):
 		return self.mLevelSurface
+
+	def EntityInRect(self, rect):
+		for entity in self.mEntities:
+			if entity.Rect().colliderect(rect):
+				return entity
+		return
 
 	def EntityAt(self, position):
 		for entity in self.mEntities:
