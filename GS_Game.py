@@ -5,6 +5,7 @@ import math
 from GameState import *
 from Player import *
 from Level import *
+from MaskedLevel import *
 
 from pygame.locals import *
 
@@ -22,7 +23,7 @@ class GS_Game(GameState):
 		return GameState.Initialize(self)
 
 	def LoadLevel(self, levelName):
-		self.mLevel = Level(self.mKernel)
+		self.mLevel = MaskedLevel(self.mKernel)
 		self.mLevel.Load(levelName)
 
 		self.mPlayer = Player(self.mKernel, self.mLevel)
@@ -62,6 +63,8 @@ class GS_Game(GameState):
 	def Update(self, delta):
 		self.mLevel.Update(delta)
 		self.mPlayer.Update(delta)
+
+		self.mLevel.mMaskPosition = self.mPlayer.mPosition
 
 		self.mLevel.Draw()
 		self.mPlayer.Draw()

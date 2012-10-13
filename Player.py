@@ -13,12 +13,12 @@ class Player(Entity):
 
 		self.mFootRect = pygame.Rect(0, 0, 15, 10)
 		self.mLeftImage, self.mRect = self.mKernel.ImageManager().LoadImage("player_left.bmp")
-		self.mRightImage = self.mKernel.ImageManager().LoadImage("player_right.bmp")
+		self.mRightImage, rrect = self.mKernel.ImageManager().LoadImage("player_right.bmp")
 
-		self.mLeftAlertedImage = self.mKernel.ImageManager().LoadImage("player_left_alert.bmp")
-		self.mRightAlertedImage = self.mKernel.ImageManager().LoadImage("player_right_alert.bmp")
+		self.mLeftAlertedImage, rrect = self.mKernel.ImageManager().LoadImage("player_left_alerted.bmp")
+		self.mRightAlertedImage, rrect = self.mKernel.ImageManager().LoadImage("player_right_alerted.bmp")
 
-		self.mLeftImage = self.mLeftImage
+		self.mImage = self.mLeftImage
 
 		self.mCollisionRect = self.mRect.copy()
 
@@ -37,6 +37,8 @@ class Player(Entity):
 			"left": False,
 			"right": False
 		}
+
+		self.mLastDirection = ""
 
 		self.mJumping = False
 		self.mGrounded = False
@@ -58,7 +60,7 @@ class Player(Entity):
 			self.mGrounded = False
 
 	def ChooseImage(self):
-		if (self.mImage == self.mLeftImage or self.mImage == self.mLeftAlertedImage):
+		if (self.mLastDirection == "left"):
 			if (self.mAlerted):
 				self.mImage = self.mLeftAlertedImage
 			else:
@@ -71,6 +73,8 @@ class Player(Entity):
 
 	def Move(self, direction):
 		self.mMoves[direction] = True
+
+		self.mLastDirection = direction
 
 		self.ChooseImage()
 
@@ -87,6 +91,11 @@ class Player(Entity):
 
 				self.mVelocity[1] = 0
 				self.mGrounded = True
+
+	def CollideEntities(self):
+		for entity in self.mLevel.mEntities:
+			if (self.CheckCollision(entity)):
+				entity.OnCollision(self)
 
 	def Interact(self):
 		other = self.mLevel.EntityInRect(self.CollisionRect())
@@ -156,14 +165,14 @@ class Player(Entity):
 		# Keep rectangles in sync
 		self.mCollisionRect.topleft = self.mPosition
 		self.mFootRect.bottom = self.mCollisionRect.bottom
-		self.mFootRect.left = self.mCollisionRect.left + 12.5
+		self.mFootRect.left = self.mCollisionRect.left + 8.5
 
 		return Entity.Update(self, delta)
 
 	def Draw(self):
 		Entity.Draw(self)
 
-		pygame.draw.rect(self.mLevel.DisplaySurface(), Colors.BLUE, self.mRect, 2)
-		pygame.draw.rect(self.mLevel.DisplaySurface(), Colors.TRANSPARENT, self.mCollisionRect, 2)
-		pygame.draw.rect(self.mLevel.DisplaySurface(), Colors.GREEN, self.mFootRect, 2)
+		# pygame.draw.rect(self.mLevel.DisplaySurface(), Colors.BLUE, self.mRect, 2)
+		# pygame.draw.rect(self.mLevel.DisplaySurface(), Colors.TRANSPARENT, self.mCollisionRect, 2)
+		# pygame.draw.rect(self.mLevel.DisplaySurface(), Colors.GREEN, self.mFootRect, 2)
 		return

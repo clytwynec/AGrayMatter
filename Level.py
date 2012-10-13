@@ -117,8 +117,8 @@ class Level:
 	def Draw(self):
 		self.mLevelSurface.blit(self.mBackgroundImage, self.mBackgroundRect)
 
-		for rect in self.mCollisionRects:
-			pygame.draw.rect(self.mLevelSurface, Colors.RED, rect, 2)
+		# for rect in self.mCollisionRects:
+		# 	pygame.draw.rect(self.mLevelSurface, Colors.RED, rect, 2)
 
 		for entity in self.mEntities:
 			entity.Draw()
