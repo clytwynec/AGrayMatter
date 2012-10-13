@@ -20,6 +20,7 @@ from pygame.locals import *
 # App level imports
 from GameKernel import *
 from GameStateManager import *
+from Level import *
 
 #random.seed(0)
 
@@ -42,19 +43,20 @@ ticker = kernel.Ticker()
 
 font = pygame.font.SysFont("Helvetica", 12)
 
+level = Level(kernel)
+level.Load("test_level")
+
 ## Main Loop
 while (1):
 
 	delta = ticker.get_time()
 
-	gsm.Update(delta)
+	level.Draw()
 
 	for event in pygame.event.get():
 		if event.type == QUIT:
 			pygame.quit()
 			sys.exit()
-		else:
-			gsm.GetActiveState().HandleEvent(event)
 
 	FPSSurf = font.render("FPS: " + str(int(ticker.get_fps())), True, (255, 255, 255))
 	FPSRect = FPSSurf.get_rect()
