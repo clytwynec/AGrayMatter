@@ -17,6 +17,7 @@ class Level:
 		self.mEntities = []
 
 		self.mLevelSurface = pygame.Surface((800, 600)).convert()
+		self.mLevelRect = pygame.Rect(0, 0, 800, 600)
 
 		return
 
@@ -69,17 +70,27 @@ class Level:
 
 		return
 
+	def DisplaySurface(self):
+		return self.mLevelSurface
+
 	def EntityAt(self, position):
 		for entity in self.mEntities:
 			if entity.Rect().collidepoint(position):
 				return entity
 		return
 
+	def Update(self, delta):
+		for entity in self.mEntities:
+			entity.Update(delta)
+
 	def Draw(self):
-		self.mKernel.DisplaySurface().blit(self.mBackgroundImage, self.mBackgroundRect)
+		self.mLevelSurface.blit(self.mBackgroundImage, self.mBackgroundRect)
 
 		for rect in self.mCollisionRects:
-			pygame.draw.rect(self.mKernel.DisplaySurface(), Colors.RED, rect, 2)
+			pygame.draw.rect(self.mLevelSurface, Colors.RED, rect, 2)
 
 		for entity in self.mEntities:
 			entity.Draw()
+
+	def Blit(self):
+		self.mKernel.DisplaySurface().blit(self.mLevelSurface, self.mLevelRect)
