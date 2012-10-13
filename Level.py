@@ -19,6 +19,8 @@ class Level:
 		self.mLevelSurface = pygame.Surface((800, 600)).convert()
 		self.mLevelRect = pygame.Rect(0, 0, 800, 600)
 
+		self.mStartPosition = [0, 400]
+
 		return
 
 	# Loads a level
@@ -54,6 +56,10 @@ class Level:
 				for entity in entitiesList:
 					parts = entity.split()
 
+					if (parts[0] == 'Start'):
+						self.mStartPosition =  [int(parts[1]), int(parts[2])]
+						continue 
+
 					entity = {
 						"name": parts[0],
 						"position": (int(parts[1]), int(parts[2]))
@@ -67,6 +73,7 @@ class Level:
 					rawEntity.SetPosition(entity["position"])
 
 					self.mEntities.append(rawEntity)
+		print self.mStartPosition
 
 		return
 

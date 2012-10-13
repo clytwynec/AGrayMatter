@@ -34,10 +34,11 @@ class Player(Entity):
 		return
 
 	def Reset(self):
-		self.SetPosition([10, 600 - self.CollisionRect().height])
+		self.SetPosition([self.mLevel.mStartPosition[0], self.mLevel.mStartPosition[1]-self.mCollisionRect.height])
 		self.mVelocity = [0, 0]
-
 		print self.mPosition
+
+
 
 	def Jump(self):
 		# Move off the ground block
@@ -96,8 +97,6 @@ class Player(Entity):
 			if (abs(self.mVelocity[0] - 0) < 0.01):
 				self.mVelocity[0] = 0
 
-		print self.mVelocity[0]
-
 		self.mPosition[0] += self.mVelocity[0]
 
 		if (self.mPosition[0] < -20):
@@ -120,9 +119,15 @@ class Player(Entity):
 
 		self.CollideWorld()
 
+		if (self.mPosition[1] > 800):
+			self.Reset()
+
+
+		# Keep rectangles in sync
 		self.mCollisionRect.topleft = self.mPosition
 		self.mFootRect.bottom = self.mCollisionRect.bottom
 		self.mFootRect.left = self.mCollisionRect.left + 12.5
+
 
 		return Entity.Update(self, delta)
 
