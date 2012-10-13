@@ -21,6 +21,7 @@ from pygame.locals import *
 from GameKernel import *
 from GameStateManager import *
 from GS_Game import *
+from GS_Editor import *
 
 
 #random.seed(0)
@@ -43,12 +44,13 @@ ticker = kernel.Ticker()
 #### Initialize game states
 gsm = GameStateManager()
 gsm.RegisterState(GS_Game(kernel, gsm))
+gsm.RegisterState(GS_Editor(kernel, gsm))
 
 kernel.SetGameStateManager(gsm)
 
 gsm.SwitchState("Game")
 
-gsm.GetActiveState().LoadLevel("test_level")
+gsm.GetActiveState().LoadLevel("communication")
 
 font = pygame.font.SysFont("Helvetica", 12)
 

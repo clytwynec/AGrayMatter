@@ -21,7 +21,7 @@ class Player(Entity):
 
 		self.mJumpVelocity = 10
 
-		self.mMoveSpeed = 4
+		self.mMoveSpeed = 0.75
 		self.mMoveThrottle = 4
 
 		self.mMoves = {
@@ -32,6 +32,12 @@ class Player(Entity):
 		self.mJumping = False
 		self.mGrounded = False
 		return
+
+	def Reset(self):
+		self.SetPosition([10, 600 - self.CollisionRect().height])
+		self.mVelocity = [0, 0]
+
+		print self.mPosition
 
 	def Jump(self):
 		# Move off the ground block
@@ -74,15 +80,23 @@ class Player(Entity):
 			self.mJumping = False
 
 		# Left/Right Movement
-		if (self.mGrounded):
-			if (self.mMoves["left"] and self.mVelocity[0] > (-1 * self.mMoveThrottle)):
-				self.mVelocity[0] -= self.mMoveSpeed
-			
-			if (self.mMoves["right"] and self.mVelocity[0] < self.mMoveThrottle):
-				self.mVelocity[0] += self.mMoveSpeed
+		# if (self.mGrounded):
+		if (self.mMoves["left"] and self.mVelocity[0] > (-1 * self.mMoveThrottle)):
+			self.mVelocity[0] -= self.mMoveSpeed
+		
+		if (self.mMoves["right"] and self.mVelocity[0] < self.mMoveThrottle):
+			self.mVelocity[0] += self.mMoveSpeed
 
-			if (not self.mMoves["left"] and not self.mMoves["right"]):
+		if (self.mVelocity[0] != 0):
+			self.mVelocity[0] = (self.mVelocity[0] / abs(self.mVelocity[0])) * min(abs(self.mVelocity[0]), self.mMoveThrottle)
+
+		if (not self.mMoves["left"] and not self.mMoves["right"]):
+			self.mVelocity[0] *= 0.5
+
+			if (abs(self.mVelocity[0] - 0) < 0.01):
 				self.mVelocity[0] = 0
+
+		print self.mVelocity[0]
 
 		self.mPosition[0] += self.mVelocity[0]
 

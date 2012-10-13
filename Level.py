@@ -70,6 +70,18 @@ class Level:
 
 		return
 
+	def Save(self, rects):
+		# Load the collision data, which consists of a list of rects (left, top, width, height)
+		collisionName = self.mLevelName + ".col"
+
+		fullCollisionName = os.path.join("data", "levels", collisionName)
+
+		with open(fullCollisionName, 'w') as file:
+			for rect in rects:
+				file.write(str(rect.left) + " " + str(rect.top) + " " + str(rect.width) + " " + str(rect.height) + "\n")
+
+		self.Load(self.mLevelName)
+
 	def Unload(self):
 		self.mEntities = []
 		self.mCollisionRects = []

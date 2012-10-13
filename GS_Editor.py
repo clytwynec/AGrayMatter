@@ -10,12 +10,14 @@ from pygame.locals import *
 
 import Colors
 
-class GS_Game(GameState):
+class GS_Editor(GameState):
 	def __init__(self, kernel, gsm):
-		GameState.__init__(self, "Game", kernel, gsm)
+		GameState.__init__(self, "Editor", kernel, gsm)
 
 		self.mLevel = None
-		self.mPlayer = None
+		self.mRects = []
+
+		self.mLastPoint = None
 
 	def Initialize(self, levelName = ""):
 		
@@ -25,8 +27,8 @@ class GS_Game(GameState):
 		self.mLevel = Level(self.mKernel)
 		self.mLevel.Load(levelName)
 
-		self.mPlayer = Player(self.mKernel, self.mLevel)
-		self.mPlayer.Reset()
+		self.mRects = self.mLevel.mCollisionRects
+
 		return
 
 	def Destroy(self):
@@ -41,30 +43,29 @@ class GS_Game(GameState):
 
 	def HandleEvent(self, event):
 
-		if (event.type == KEYDOWN):
-			if (event.key == K_UP):
-				self.mPlayer.Jump()
-			elif (event.key == K_LEFT):
-				self.mPlayer.Move("left")
-			elif (event.key == K_RIGHT):
-				self.mPlayer.Move("right")
-			elif (event.key == K_SPACE):
-				self.mPlayer.Interact()
+		if (event.type == MOUSEBUTTONDOWN):
+			if (self.mLastPoint):
+				width = event.pos[0] - self.mLastPoint[0]
+				height = event.pos[1] - self.mLastPoint[1]
 
-		elif (event.type == KEYUP):
-			if (event.key == K_LEFT):
-				self.mPlayer.Stop("left")
-			elif (event.key == K_RIGHT):
-				self.mPlayer.Stop("right")
+				self.mRects.append(pygame.Rect(self.mLastPoint[0], self.mLastPoint[1], width, height))
+
+				self.mLastPoint = None
+			else:
+				self.mLastPoint = event.pos
+		elif (event.type == KEYDOWN):
+			if (event.key == K_BACKSPACE):
+				self.mRects.pop()
+			elif (event.key == K_RETURN):
+				self.mLevel.Save(self.mRects)
 
 		return GameState.HandleEvent(self, event)
 
 	def Update(self, delta):
-		self.mLevel.Update(delta)
-		self.mPlayer.Update(delta)
-
 		self.mLevel.Draw()
-		self.mPlayer.Draw()
+
+		for rect in self.mRects:
+			pygame.draw.rect(self.mLevel.DisplaySurface(), Colors.RED, rect, 2)
 
 		self.mLevel.Blit()
 		
