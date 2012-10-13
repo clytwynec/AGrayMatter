@@ -4,6 +4,6 @@ from LevelChangeTrigger import *
 
 import Colors
 
-class VisualDoor(LevelChangeTrigger):
+class MotorDoor(LevelChangeTrigger):
 	def __init__(self, kernel, level):
 		LevelChangeTrigger.__init__(self, kernel, level, 'test_level2')
