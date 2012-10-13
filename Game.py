@@ -50,7 +50,7 @@ kernel.SetGameStateManager(gsm)
 
 gsm.SwitchState("Game")
 
-gsm.GetActiveState().LoadLevel("communication")
+gsm.GetActiveState().LoadLevel("audio")
 
 font = pygame.font.SysFont("Helvetica", 12)
 

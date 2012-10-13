@@ -12,6 +12,8 @@ class MaskedLevel(Level):
 		self.mMask, self.mMaskRect = self.mKernel.ImageManager().LoadImage("mask.bmp")
 		self.mMaskSurface = pygame.Surface((800, 600)).convert(self.mLevelSurface)
 
+		self.mPlayerMask, self.mPlayerRect = self.mKernel.ImageManager().LoadImage("player_mask.bmp")
+
 		self.mMaskPosition = [100, 100]
 
 	def Update(self, delta):
@@ -26,6 +28,7 @@ class MaskedLevel(Level):
 
 		self.mMaskSurface.fill(Colors.BLACK)
 		self.mMaskSurface.blit(self.mMask, self.mMaskRect)
+		self.mMaskSurface.blit(self.mPlayerMask, self.mPlayerRect, None, BLEND_ADD)
 		self.mLevelSurface.blit(self.mMaskSurface, self.mMaskSurface.get_rect(), None, BLEND_MULT)
 
 		return

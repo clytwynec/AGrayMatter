@@ -62,7 +62,7 @@ class Level:
 
 					entity = {
 						"name": parts[0],
-						"position": (int(parts[1]), int(parts[2]))
+						"position": [int(parts[1]), int(parts[2])]
 					}
 
 					mod = __import__(entity["name"])

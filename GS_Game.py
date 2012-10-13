@@ -6,6 +6,7 @@ from GameState import *
 from Player import *
 from Level import *
 from MaskedLevel import *
+from AudioLevel import *
 
 from pygame.locals import *
 
@@ -23,7 +24,7 @@ class GS_Game(GameState):
 		return GameState.Initialize(self)
 
 	def LoadLevel(self, levelName):
-		self.mLevel = MaskedLevel(self.mKernel)
+		self.mLevel = AudioLevel(self.mKernel)
 		self.mLevel.Load(levelName)
 
 		self.mPlayer = Player(self.mKernel, self.mLevel)
@@ -61,14 +62,17 @@ class GS_Game(GameState):
 		return GameState.HandleEvent(self, event)
 
 	def Update(self, delta):
-		self.mLevel.Update(delta)
-		self.mPlayer.Update(delta)
 
-		self.mLevel.mMaskPosition = self.mPlayer.mPosition
+		self.mPlayer.Update(delta)
+		self.mLevel.Update(delta)
+
+		self.mLevel.mPlayerRect.center = self.mPlayer.mRect.center
 
 		self.mLevel.Draw()
 		self.mPlayer.Draw()
 
 		self.mLevel.Blit()
 		
+		self.mLevel.mMaskPosition = [-100, -100]
+
 		return GameState.Update(self, delta)
