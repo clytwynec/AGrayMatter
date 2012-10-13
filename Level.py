@@ -70,6 +70,12 @@ class Level:
 
 		return
 
+	def Unload(self):
+		self.mEntities = []
+		self.mCollisionRects = []
+		self.mBackgroundRect = None
+		self.mBackgroundImage = None
+
 	def DisplaySurface(self):
 		return self.mLevelSurface
 

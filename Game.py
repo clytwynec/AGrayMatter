@@ -44,6 +44,8 @@ ticker = kernel.Ticker()
 gsm = GameStateManager()
 gsm.RegisterState(GS_Game(kernel, gsm))
 
+kernel.SetGameStateManager(gsm)
+
 gsm.SwitchState("Game")
 
 gsm.GetActiveState().LoadLevel("test_level")

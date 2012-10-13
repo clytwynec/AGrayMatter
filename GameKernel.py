@@ -25,6 +25,8 @@ class GameKernel:
 		self.mImageManager = ImageManager(self)
 		self.mSoundManager = SoundManager(self)
 
+		self.mGameStateManager = None
+
 	#####################################################
 	# InitializeDisplay
 	#
@@ -81,6 +83,13 @@ class GameKernel:
 
 	def SoundManager(self):
 		return self.mSoundManager
+
+	def SetGameStateManager(self, gsm):
+		self.mGameStateManager = gsm
+
+	def GameStateManager(self):
+		if (self.mGameStateManager):
+			return self.mGameStateManager
 
 	#####################################################
 	# FlipDisplay
