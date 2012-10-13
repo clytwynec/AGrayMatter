@@ -85,7 +85,7 @@ class Level:
 
 		with open(fullCollisionName, 'w') as file:
 			for rect in rects:
-				file.write(str(rect.left) + " " + str(rect.top) + " " + str(rect.width) + " " + str(rect.height) + "\n")
+				file.write(str(rect.left) + " " + str(rect.top) + " " + str(rect.width) + " " + str(4) + "\n")
 
 		self.Load(self.mLevelName)
 

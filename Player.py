@@ -11,9 +11,18 @@ class Player(Entity):
 
 		self.mVelocity = [0, 0]
 
-		self.mCollisionRect = pygame.Rect(0, 0, 50, 125)
-		self.mFootRect = pygame.Rect(0, 124, 25, 10)
-		self.mRect = pygame.Rect(0, 0, 50, 125)
+		self.mFootRect = pygame.Rect(0, 0, 15, 10)
+		self.mLeftImage, self.mRect = self.mKernel.ImageManager().LoadImage("player_left.bmp")
+		self.mRightImage = self.mKernel.ImageManager().LoadImage("player_right.bmp")
+
+		self.mLeftAlertedImage = self.mKernel.ImageManager().LoadImage("player_left_alert.bmp")
+		self.mRightAlertedImage = self.mKernel.ImageManager().LoadImage("player_right_alert.bmp")
+
+		self.mLeftImage = self.mLeftImage
+
+		self.mCollisionRect = self.mRect.copy()
+
+		self.mAlerted = False
 
 		self.mGravity = 0.5
 		self.mGravityThrottle = 10
@@ -38,8 +47,6 @@ class Player(Entity):
 		self.mVelocity = [0, 0]
 		print self.mPosition
 
-
-
 	def Jump(self):
 		# Move off the ground block
 		if (self.mGrounded and not self.mJumping):
@@ -50,8 +57,22 @@ class Player(Entity):
 			self.mJumping = True
 			self.mGrounded = False
 
+	def ChooseImage(self):
+		if (self.mImage == self.mLeftImage or self.mImage == self.mLeftAlertedImage):
+			if (self.mAlerted):
+				self.mImage = self.mLeftAlertedImage
+			else:
+				self.mImage = self.mLeftImage
+		else:
+			if (self.mAlerted):
+				self.mImage = self.mRightAlertedImage
+			else:
+				self.mImage = self.mRightImage
+
 	def Move(self, direction):
 		self.mMoves[direction] = True
+
+		self.ChooseImage()
 
 	def Stop(self, direction):
 		self.mMoves[direction] = False
@@ -122,12 +143,20 @@ class Player(Entity):
 		if (self.mPosition[1] > 800):
 			self.Reset()
 
+		preAlertState = self.mAlerted
+
+		if (self.mLevel.EntityInRect(self.CollisionRect())):
+			self.mAlerted = True
+		else:
+			self.mAlerted = False
+
+		if (self.mAlerted != preAlertState):
+			self.ChooseImage()
 
 		# Keep rectangles in sync
 		self.mCollisionRect.topleft = self.mPosition
 		self.mFootRect.bottom = self.mCollisionRect.bottom
 		self.mFootRect.left = self.mCollisionRect.left + 12.5
-
 
 		return Entity.Update(self, delta)
 
