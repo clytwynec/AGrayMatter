@@ -100,7 +100,7 @@ class Player(Entity):
 	def Interact(self):
 		other = self.mLevel.EntityInRect(self.CollisionRect())
 
-		if (other):
+		if (other and other.mInteractable):
 			other.Trigger(self)
 
 	def Update(self, delta):
@@ -148,13 +148,14 @@ class Player(Entity):
 		self.mPosition[1] = int(self.mPosition[1])
 
 		self.CollideWorld()
+		self.CollideEntities()
 
 		if (self.mPosition[1] > 800):
 			self.Reset()
 
 		preAlertState = self.mAlerted
 
-		if (self.mLevel.EntityInRect(self.CollisionRect())):
+		if (self.mLevel.EntityInRect(self.CollisionRect()) and self.mLevel.EntityInRect(self.CollisionRect()).mInteractable):
 			self.mAlerted = True
 		else:
 			self.mAlerted = False
