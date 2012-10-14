@@ -5,9 +5,7 @@ import math
 from GameState import *
 from Player import *
 from Level import *
-from MaskedLevel import *
-from AudioLevel import *
-from MotorLevel import *
+from DelayedLevel import *
 
 from pygame.locals import *
 
@@ -25,10 +23,12 @@ class GS_DelayLevel(GameState):
 
 	def Initialize(self, levelName = ""):
 		
+		self.LoadLevel("timing")
+
 		return GameState.Initialize(self)
 
 	def LoadLevel(self, levelName):
-		self.mLevel = Level(self.mKernel)
+		self.mLevel = DelayedLevel(self.mKernel)
 		self.mLevel.Load(levelName)
 
 		self.mPlayer = Player(self.mKernel, self.mLevel)
@@ -84,7 +84,7 @@ class GS_DelayLevel(GameState):
 		self.mPlayer.Update(delta)
 		self.mLevel.Update(delta)
 
-		# self.mLevel.mPlayerRect.center = self.mPlayer.mRect.center
+		self.mLevel.mPlayerRect.center = self.mPlayer.mRect.center
 
 		self.mLevel.Draw()
 		self.mPlayer.Draw()

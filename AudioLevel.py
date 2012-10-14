@@ -13,7 +13,7 @@ class AudioLevel(MaskedLevel):
 		self.mCurrentPlatform = None
 
 	def Load(self, levelName):
-		MaskedLevel.Load(self, levelName)
+		Level.Load(self, levelName)
 
 		self.ResetTriggers()
 

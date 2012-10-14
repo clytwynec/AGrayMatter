@@ -56,8 +56,11 @@ class Level:
 				for entity in entitiesList:
 					parts = entity.split()
 
+					print parts
+
 					if (parts[0] == 'Start'):
 						self.mStartPosition =  [int(parts[1]), int(parts[2])]
+						print self.mStartPosition
 						continue 
 
 					entity = {

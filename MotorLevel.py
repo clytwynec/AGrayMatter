@@ -2,13 +2,13 @@ import pygame
 from CraneBox import *
 from CraneSwitch import *
 from MotorDoor import *
-from Level import *
+from MaskedLevel import *
 
 import Colors
 
-class MotorLevel(Level):
+class MotorLevel(MaskedLevel):
 	def __init__(self, kernel):
-		Level.__init__(self, kernel)
+		MaskedLevel.__init__(self, kernel)
 		
 		self.mCraneSwitch = None
 		self.mDoor = None
@@ -17,9 +17,12 @@ class MotorLevel(Level):
 
 		self.mMotorWire, self.mMotorRect = self.mKernel.ImageManager().LoadImage('motor_wire.bmp')
 
+		self.mMaskPosition = [400, 300]
+		self.mMask, self.mMaskRect = self.mKernel.ImageManager().LoadImage('motor_mask.bmp', False)
+
 
 	def Load(self, levelName):
-		Level.Load(self, levelName)
+		MaskedLevel.Load(self, levelName)
 
 		self.mCraneSwitch = CraneSwitch(self.mKernel, self)
 		self.mDoor = MotorDoor(self.mKernel, self)
@@ -36,11 +39,11 @@ class MotorLevel(Level):
 
 
 	def Draw(self):
-		Level.Draw(self)
+		MaskedLevel.Draw(self)
 		self.mLevelSurface.blit(self.mMotorWire, self.mMotorRect)
 
 	def Update(self, delta):
-		Level.Update(self, delta)
+		MaskedLevel.Update(self, delta)
 
 		if(self.mDoorTriggered >= 2):
 			self.mDoor.LiftDoor()

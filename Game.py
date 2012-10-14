@@ -24,6 +24,7 @@ from GS_Game import *
 from GS_Editor import *
 from GS_AudioLevel import *
 from GS_DelayLevel import *
+from GS_MotorLevel import *
 from GS_MainMenu import *
 
 
@@ -51,10 +52,11 @@ gsm.RegisterState(GS_Game(kernel, gsm))
 gsm.RegisterState(GS_Editor(kernel, gsm))
 gsm.RegisterState(GS_DelayLevel(kernel, gsm))
 gsm.RegisterState(GS_AudioLevel(kernel, gsm))
+gsm.RegisterState(GS_MotorLevel(kernel, gsm))
 
 kernel.SetGameStateManager(gsm)
 
-gsm.SwitchState("MainMenu")
+gsm.SwitchState("MotorLevel")
 
 # gsm.GetActiveState().LoadLevel("motor")
 

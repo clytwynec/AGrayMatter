@@ -9,10 +9,10 @@ class MaskedLevel(Level):
 	def __init__(self, kernel):
 		Level.__init__(self, kernel)
 		
-		self.mMask, self.mMaskRect = self.mKernel.ImageManager().LoadImage("mask.bmp")
+		self.mMask, self.mMaskRect = self.mKernel.ImageManager().LoadImage("mask.bmp", False)
 		self.mMaskSurface = pygame.Surface((800, 600)).convert(self.mLevelSurface)
 
-		self.mPlayerMask, self.mPlayerRect = self.mKernel.ImageManager().LoadImage("player_mask.bmp")
+		self.mPlayerMask, self.mPlayerRect = self.mKernel.ImageManager().LoadImage("player_mask.bmp", False)
 
 		self.mMaskPosition = [100, 100]
 

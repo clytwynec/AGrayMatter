@@ -7,13 +7,17 @@ class GS_MainMenu(GS_MenuBase):
 		GS_MenuBase.__init__(self, "MainMenu", kernel, gsm)
 
 		self.mHeadingImage, self.mHeadingRect = kernel.ImageManager().LoadImage("GrayMatter.bmp", False)
-		self.mLevel = AudioLevel(self.mKernel)
-		self.mPlayer = Player(self.mKernel, self.mLevel)
-
-		self.mLevel.mMaskPosition = [575, 500]
+		self.mHeadingRect.topleft = [ 400 - (self.mHeadingRect.width / 2.0), 20 ]
+		self.mLevel = None
+		self.mPlayer = None
 
 	def Initialize(self):
+		self.mLevel = AudioLevel(self.mKernel)
 		self.mLevel.Load("main_menu")
+		self.mLevel.mMaskPosition = [700, 500]
+
+		self.mPlayer = Player(self.mKernel, self.mLevel)
+		self.mPlayer.Reset()
 
 		GS_MenuBase.Initialize(self)
 
