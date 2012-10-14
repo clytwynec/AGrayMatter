@@ -65,7 +65,7 @@ class GS_DelayLevel(GameState):
 	def HandleEvent(self, event):
 		if (event.type == KEYDOWN or event.type == KEYUP):
 			self.mEventsQueue.append({
-				"tick": self.mTicks + 500,
+				"tick": self.mTicks + 450,
 				"event": event
 			});
 
