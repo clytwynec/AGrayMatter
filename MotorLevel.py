@@ -23,7 +23,7 @@ class MotorLevel(MaskedLevel):
 		self.mMaskPosition = [400, 300]
 		self.mMask, self.mMaskRect = self.mKernel.ImageManager().LoadImage('motor_mask.bmp', False)
 
-
+		self.mSound = self.mKernel.SoundManager().LoadSound("HeartBeep.wav")
 
 		self.mDialogueFont = pygame.font.SysFont("Times", 24, False)
 		self.mDialogueText, self.mDialogueRect = self.mKernel.ImageManager().LoadImage('motor_text.bmp')
@@ -85,4 +85,5 @@ class MotorLevel(MaskedLevel):
 			self.mDialogueTriggered -= delta
 
 		if(self.mDoorTriggered >= 2):
+			self.mSound.play()
 			self.mDoor.LiftDoor()

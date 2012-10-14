@@ -68,7 +68,7 @@ def main():
 
 	kernel.SetGameStateManager(gsm)
 
-	gsm.SwitchState("MainMenu")
+	gsm.SwitchState("DelayLevel")
 
 	# gsm.GetActiveState().LoadLevel("end")
 

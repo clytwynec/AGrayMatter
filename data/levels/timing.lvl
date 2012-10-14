@@ -1,5 +1,7 @@
 Start 0 532
 Moon1 160 -20
 Moon2 412 600
-Moon3 560 -20
+Moon3 567 -20
 EndChange 680 63
+SafePoint 760 398
+SafePoint 20 240

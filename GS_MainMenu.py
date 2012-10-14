@@ -24,7 +24,7 @@ class GS_MainMenu(GS_MenuBase):
 		
 		self.mLevel = None
 		self.mPlayer = None
-		self.mTime = -7000
+		self.mTime = -700
 
 	def Initialize(self):
 		self.mLevel = MaskedLevel(self.mKernel)
