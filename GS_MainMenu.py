@@ -6,7 +6,7 @@ class GS_MainMenu(GS_MenuBase):
 	def __init__(self, kernel, gsm):
 		GS_MenuBase.__init__(self, "MainMenu", kernel, gsm)
 
-		kernel.ImageManager().LoadImage("GrayMatter.bmp")
+		self.mHeadingImage, self.mHeadingRect = kernel.ImageManager().LoadImage("GrayMatter.bmp")
 		self.mLevel = AudioLevel(self.mKernel)
 		self.mPlayer = Player(self.mKernel, self.mLevel)
 
@@ -48,6 +48,8 @@ class GS_MainMenu(GS_MenuBase):
 
 		self.mLevel.Draw()
 		self.mPlayer.Draw()
+
+		self.m
 
 		self.mLevel.Blit()
 
