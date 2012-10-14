@@ -1,6 +1,6 @@
 from GS_MenuBase import *
 from Player import *
-from AudioLevel import *
+from MaskedLevel import *
 
 class GS_MainMenu(GS_MenuBase):
 	def __init__(self, kernel, gsm):
@@ -12,9 +12,10 @@ class GS_MainMenu(GS_MenuBase):
 		self.mPlayer = None
 
 	def Initialize(self):
-		self.mLevel = AudioLevel(self.mKernel)
+		self.mLevel = MaskedLevel(self.mKernel)
 		self.mLevel.Load("main_menu")
 		self.mLevel.mMaskPosition = [700, 500]
+		self.mLevel.mMaskRect.center = self.mLevel.mMaskPosition
 
 		self.mPlayer = Player(self.mKernel, self.mLevel)
 		self.mPlayer.Reset()

@@ -41,49 +41,54 @@ optionParser = OptionParser()
 # optionParser.add_option("-l", "--levellength", help="When editing a level, this is the length of the level")
 (options, args) = optionParser.parse_args()
 
-#### Kick off the graphics/window system
-kernel = GameKernel()
-screenSurface = kernel.InitializeDisplay((800, 600))
-ticker = kernel.Ticker()
+def main():
+	#### Kick off the graphics/window system
+	kernel = GameKernel()
+	screenSurface = kernel.InitializeDisplay((800, 600))
+	ticker = kernel.Ticker()
 
-#### Initialize game states
-gsm = GameStateManager()
-gsm.RegisterState(GS_MainMenu(kernel, gsm))
-gsm.RegisterState(GS_Game(kernel, gsm))
-gsm.RegisterState(GS_Editor(kernel, gsm))
-gsm.RegisterState(GS_DelayLevel(kernel, gsm))
-gsm.RegisterState(GS_AudioTransition(kernel, gsm))
-gsm.RegisterState(GS_AudioLevel(kernel, gsm))
-gsm.RegisterState(GS_MotorLevel(kernel, gsm))
+	#### Initialize game states
+	gsm = GameStateManager()
+	gsm.RegisterState(GS_MainMenu(kernel, gsm))
+	gsm.RegisterState(GS_Game(kernel, gsm))
+	gsm.RegisterState(GS_Editor(kernel, gsm))
+	gsm.RegisterState(GS_DelayLevel(kernel, gsm))
+	gsm.RegisterState(GS_AudioTransition(kernel, gsm))
+	gsm.RegisterState(GS_AudioLevel(kernel, gsm))
+	gsm.RegisterState(GS_MotorLevel(kernel, gsm))
 
-kernel.SetGameStateManager(gsm)
+	kernel.SetGameStateManager(gsm)
 
-gsm.SwitchState("MainMenu")
+	gsm.SwitchState("MainMenu")
 
-# gsm.GetActiveState().LoadLevel("motor")
+	# gsm.GetActiveState().LoadLevel("motor")
 
-font = pygame.font.SysFont("Helvetica", 12)
+	font = pygame.font.SysFont("Helvetica", 12)
 
-## Main Loop
-while (1):
+	## Main Loop
+	while (1):
 
-	delta = ticker.get_time()
-	
-	gsm.Update(delta)
+		delta = ticker.get_time()
+		
+		gsm.Update(delta)
 
-	for event in pygame.event.get():
-		if event.type == QUIT:
-			pygame.quit()
-			sys.exit()
-		else:
-			gsm.GetActiveState().HandleEvent(event)
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				pygame.quit()
+				sys.exit()
+			else:
+				gsm.GetActiveState().HandleEvent(event)
 
-	FPSSurf = font.render("FPS: " + str(int(ticker.get_fps())), True, (255, 255, 255))
-	FPSRect = FPSSurf.get_rect()
-	FPSRect.topright = screenSurface.get_rect().topright
-	screenSurface.blit(FPSSurf, FPSRect)
+		FPSSurf = font.render("FPS: " + str(int(ticker.get_fps())), True, (255, 255, 255))
+		FPSRect = FPSSurf.get_rect()
+		FPSRect.topright = screenSurface.get_rect().topright
+		screenSurface.blit(FPSSurf, FPSRect)
 
-	kernel.FlipDisplay()
+		kernel.FlipDisplay()
 
-	ticker.tick(60)
-	
+		ticker.tick(60)
+
+main()
+
+# import cProfile as profile
+# profile.run('main()', 'profile.out')

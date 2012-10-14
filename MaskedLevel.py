@@ -19,7 +19,7 @@ class MaskedLevel(Level):
 	def Update(self, delta):
 		Level.Update(self, delta)
 
-		self.mMaskRect.center = self.mMaskPosition
+		# self.mMaskRect.center = self.mMaskPosition
 
 		return
 
