@@ -136,7 +136,7 @@ class Player(Entity):
 
 		# Friction unless jumping
 
-		# Gravity unless Jumping
+		# Gravity only if Jumping
 		if (not self.mGrounded):
 			if (self.mVelocity[1] < self.mGravityThrottle):
 				self.mVelocity[1] += self.mGravity
