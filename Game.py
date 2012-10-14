@@ -52,7 +52,7 @@ kernel.SetGameStateManager(gsm)
 
 gsm.SwitchState("DelayLevel")
 
-gsm.GetActiveState().LoadLevel("audio")
+gsm.GetActiveState().LoadLevel("timing")
 
 font = pygame.font.SysFont("Helvetica", 12)
 
