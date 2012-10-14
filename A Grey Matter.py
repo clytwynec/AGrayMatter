@@ -14,6 +14,7 @@ import os
 import math
 import pygame
 import random 
+import pygame._view
 
 from pygame.locals import *
 
@@ -32,7 +33,21 @@ from GS_DelayTransition import *
 from GS_EndTransition import *
 from GS_End import *
 
-
+import AudioLevelChange
+import AudioLevelTrigger
+import AudioTrigger
+import CraneBox
+import CraneSwitch
+import DeathBox
+import DelayLevelChange
+import EndChange
+import Moon1
+import Moon2
+import Moon3
+import MotorDoor
+import MotorLevelChange
+import SafePoint
+import ScreechTrigger
 
 #random.seed(0)
 
