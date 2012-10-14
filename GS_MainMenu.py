@@ -6,10 +6,14 @@ class GS_MainMenu(GS_MenuBase):
 	def __init__(self, kernel, gsm):
 		GS_MenuBase.__init__(self, "MainMenu", kernel, gsm)
 
-		self.mHeadingImage, self.mHeadingRect = kernel.ImageManager().LoadImage("GrayMatter.bmp", False)
+		self.mHeading, self.mHeadingRect = kernel.ImageManager().LoadImage("GrayMatter.bmp", False)
+		self.mCompanyImage, self.mCompanyRect = kernel.ImageManager().LoadImage("company.bmp", False)
+		self.mCompanyImage.set_alpha(0)
 		self.mHeadingRect.topleft = [ 400 - (self.mHeadingRect.width / 2.0), 20 ]
+		self.mCompanyRect.topleft = [ 400 - (self.mCompanyRect.width / 2.0), 155 ]
 		self.mLevel = None
 		self.mPlayer = None
+		self.mTime = -700
 
 	def Initialize(self):
 		self.mLevel = AudioLevel(self.mKernel)
@@ -20,6 +24,8 @@ class GS_MainMenu(GS_MenuBase):
 		self.mPlayer.Reset()
 
 		GS_MenuBase.Initialize(self)
+
+
 
 	def Unpause(self):
 
@@ -49,13 +55,28 @@ class GS_MainMenu(GS_MenuBase):
 		self.mPlayer.Update(delta)
 		self.mLevel.Update(delta)
 
+		self.mTime += delta
+
 		self.mLevel.mPlayerRect.center = self.mPlayer.mRect.center
 
 		self.mLevel.Draw()
 		self.mPlayer.Draw()
 
-		self.mLevel.DisplaySurface().blit(self.mHeadingImage, self.mHeadingRect)
+		# self.mSurface.fill((64, 64, 64))
+		# self.mSurface.blit(self.mCompanyImage, self.mCompanyRect)
+
+		alpha = None
+
+		if (self.mTime > 0 and self.mTime <= 3000):
+			alpha = 255 * self.mTime / 3000.0
+		 
+		if (alpha):
+			self.mCompanyImage.set_alpha(alpha)
+
+		# self.mKernel.DisplaySurface().blit(self.mSurface, self.mSurface.get_rect())
+
+		self.mLevel.DisplaySurface().blit(self.mCompanyImage, self.mCompanyRect)
 
 		self.mLevel.Blit()
-
-		GS_MenuBase.Update(self, delta)
+		
+		return GS_MenuBase.Update(self, delta)

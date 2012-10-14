@@ -6,7 +6,7 @@ import Colors
 
 class MotorDoor(LevelChangeTrigger):
 	def __init__(self, kernel, level):
-		LevelChangeTrigger.__init__(self, kernel, level, 'DelayLevel')
+		LevelChangeTrigger.__init__(self, kernel, level, 'DelayTransition')
 
 		self.mRising = False
 

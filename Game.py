@@ -27,6 +27,10 @@ from GS_AudioLevel import *
 from GS_DelayLevel import *
 from GS_MotorLevel import *
 from GS_MainMenu import *
+from GS_MotorTransition import *
+from GS_DelayTransition import *
+from GS_EndTransition import *
+
 
 
 #random.seed(0)
@@ -53,6 +57,9 @@ gsm.RegisterState(GS_Game(kernel, gsm))
 gsm.RegisterState(GS_Editor(kernel, gsm))
 gsm.RegisterState(GS_DelayLevel(kernel, gsm))
 gsm.RegisterState(GS_AudioTransition(kernel, gsm))
+gsm.RegisterState(GS_MotorTransition(kernel, gsm))
+gsm.RegisterState(GS_DelayTransition(kernel, gsm))
+gsm.RegisterState(GS_EndTransition(kernel, gsm))
 gsm.RegisterState(GS_AudioLevel(kernel, gsm))
 gsm.RegisterState(GS_MotorLevel(kernel, gsm))
 

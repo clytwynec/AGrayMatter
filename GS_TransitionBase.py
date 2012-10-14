@@ -12,7 +12,7 @@ class GS_TransitionBase(GameState):
 		self.mTime = 8000
 		self.mNextState = nextState
 
-		self.mQuoteImage, self.mQuoteRect = self.mKernel.ImageManager().LoadImage(name + "_introtext.bmp")
+		self.mQuoteImage, self.mQuoteRect = self.mKernel.ImageManager().LoadImage(nextState + "_introtext.bmp")
 		self.mMask, self.mMaskRect = self.mKernel.ImageManager().LoadImage("motor_mask.bmp")
 		self.mQuoteRect.center = (400, 300)
 
