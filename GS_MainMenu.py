@@ -9,8 +9,19 @@ class GS_MainMenu(GS_MenuBase):
 		self.mHeading, self.mHeadingRect = kernel.ImageManager().LoadImage("GrayMatter.bmp", False)
 		self.mCompanyImage, self.mCompanyRect = kernel.ImageManager().LoadImage("company.bmp", False)
 		self.mCompanyImage.set_alpha(0)
+		self.mArrowRight, self.mArrowRightRect = kernel.ImageManager().LoadImage("arrow_right.bmp", False)
+		self.mArrowLeft, self.mArrowLeftRect = kernel.ImageManager().LoadImage("arrow_left.bmp", False)
+		self.mArrowUp, self.mArrowUpRect = kernel.ImageManager().LoadImage("arrow_up.bmp", False)
+		self.mSpaceBar, self.mSpaceBarRect = kernel.ImageManager().LoadImage("space_bar.bmp", False)
+
+		self.mArrowRightRect.topleft = [364, 568]
+		self.mArrowLeftRect.topleft = [300, 568]
+		self.mArrowUpRect.topleft = [332, 550]
+		self.mSpaceBarRect.topleft = [400, 555]
+
 		self.mHeadingRect.topleft = [ 400 - (self.mHeadingRect.width / 2.0), 20 ]
 		self.mCompanyRect.topleft = [ 400 - (self.mCompanyRect.width / 2.0), 155 ]
+		
 		self.mLevel = None
 		self.mPlayer = None
 		self.mTime = -700
@@ -78,5 +89,10 @@ class GS_MainMenu(GS_MenuBase):
 		self.mLevel.DisplaySurface().blit(self.mCompanyImage, self.mCompanyRect)
 
 		self.mLevel.Blit()
+
+		self.mKernel.DisplaySurface().blit(self.mArrowRight, self.mArrowRightRect)
+		self.mKernel.DisplaySurface().blit(self.mArrowLeft, self.mArrowLeftRect)
+		self.mKernel.DisplaySurface().blit(self.mSpaceBar, self.mSpaceBarRect)
+		self.mKernel.DisplaySurface().blit(self.mArrowUp, self.mArrowUpRect)
 		
 		return GS_MenuBase.Update(self, delta)
