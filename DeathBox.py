@@ -5,19 +5,12 @@ from Entity import *
 
 import Colors
 
-class AudioLevelTrigger(Entity):
+class DeathBox(Entity):
 	def __init__(self, kernel, level):
 		Entity.__init__(self, kernel, level)
 		
 		self.mInteractable = False
-		self.mRect = pygame.Rect(0, 0, 20, 2)
-
-		self.mOffset = 1000
-		self.mTick = 0
-
-		self.mCountdown = 0
-
-		self.mMaskImage, self.mMaskRect = self.mKernel.ImageManager().LoadImage("mask.bmp")
+		self.mRect = pygame.Rect(0, 0, 20, 10)
 
 	def SetPosition(self, position):
 		Entity.SetPosition(self, position)

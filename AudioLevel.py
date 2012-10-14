@@ -1,4 +1,5 @@
 import pygame
+import random
 
 from MaskedLevel import *
 import Colors
@@ -15,21 +16,17 @@ class AudioLevel(MaskedLevel):
 	def Load(self, levelName):
 		Level.Load(self, levelName)
 
-		self.ResetTriggers()
+		self.SetTriggers()
 
-	def ResetTriggers(self):
+	def SetTriggers(self):
 		for entity in self.mEntities:
 			if (entity.IsA("AudioLevelTrigger")):
-				self.mAudioTriggers.append(entity)
-		
-		prev = None
-		for trigger in self.mAudioTriggers:
-			if not prev:
-				prev = trigger
-				continue
-			else:
-				prev.mNextNode = trigger
-				prev = trigger
+				entity.mOffset = random.randrange(6000, 20000, 500)
 
-	def Update(self, delta):
-		MaskedLevel.Update(self, delta)
+	def Draw(self):
+		self.mMaskSurface.fill(Colors.BLACK)
+		Level.Draw(self)
+
+		self.mMaskSurface.blit(self.mPlayerMask, self.mPlayerRect, None, BLEND_ADD)
+
+		self.mLevelSurface.blit(self.mMaskSurface, self.mMaskSurface.get_rect(), None, BLEND_MULT)
