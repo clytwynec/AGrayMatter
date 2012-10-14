@@ -4,12 +4,14 @@ from Entity import *
 
 import Colors
 
-class CraneSwitch(Entity):
+class CraneBox(Entity):
 	def __init__(self, kernel, level):
 		Entity.__init__(self, kernel, level)
 		
 		self.mInteractable = True
-		self.mRect = pygame.Rect(0, 0, 100, 100)
+		self.mOffImage, self.mRect = self.mKernel.ImageManager().LoadImage('power_off.bmp')
+		self.mOnImage, self.mOnRect = self.mKernel.ImageManager().LoadImage('power_on.bmp')
+		self.mImage = self.mOffImage
 
 	def Trigger(self, other):
-		print "Triggered!"
+		self.mImage = self.mOnImage

@@ -21,6 +21,10 @@ class MotorLevel(Level):
 		self.mDoor = MotorDoor(self.mKernel, self)
 		self.mCraneBox = CraneBox(self.mKernel, self)
 
-		self.mCraneSwitch.SetPosition([100,100])
-		self.mDoor.SetPosition([200,200])
-		self.mCraneBox.SetPosition([300,300])
+		self.mCraneSwitch.SetPosition([348,27])
+		self.mDoor.SetPosition([355,375])
+		self.mCraneBox.SetPosition([675,325])
+
+		self.mEntities.append(self.mCraneSwitch)
+		self.mEntities.append(self.mDoor)
+		self.mEntities.append(self.mCraneBox)

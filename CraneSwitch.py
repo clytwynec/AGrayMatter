@@ -9,7 +9,8 @@ class CraneSwitch(Entity):
 		Entity.__init__(self, kernel, level)
 		
 		self.mInteractable = True
-		self.mRect = pygame.Rect(0, 0, 100, 100)
-
+		self.mOffImage, self.mRect = self.mKernel.ImageManager().LoadImage('switch_off.bmp')
+		self.mOnImage, self.mOnRect = self.mKernel.ImageManager().LoadImage('switch_on.bmp')
+		self.mImage = self.mOffImage
 	def Trigger(self, other):
-		print "Triggered!"
+		self.mImage = self.mOnImage
