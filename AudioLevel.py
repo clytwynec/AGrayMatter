@@ -26,8 +26,6 @@ class AudioLevel(MaskedLevel):
 		for trigger in self.mAudioTriggers:
 			if not prev:
 				prev = trigger
-				self.mCurrentPlatform = prev
-				self.mCurrentPlatform.Trigger(None)
 				continue
 			else:
 				prev.mNextNode = trigger

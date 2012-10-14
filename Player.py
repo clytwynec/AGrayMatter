@@ -47,7 +47,6 @@ class Player(Entity):
 	def Reset(self):
 		self.SetPosition([self.mLevel.mStartPosition[0], self.mLevel.mStartPosition[1]-self.mCollisionRect.height])
 		self.mVelocity = [0, 0]
-		print self.mPosition
 
 	def Jump(self):
 		# Move off the ground block

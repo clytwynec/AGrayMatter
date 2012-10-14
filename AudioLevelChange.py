@@ -4,4 +4,4 @@ from LevelChangeTrigger import *
 
 class AudioLevelChange (LevelChangeTrigger):
 	def __init__(self, kernel, level):
-		LevelChangeTrigger.__init__(self, kernel, level, 'AudioLevel')
+		LevelChangeTrigger.__init__(self, kernel, level, 'AudioTransition')
