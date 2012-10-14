@@ -70,8 +70,6 @@ def main():
 
 	gsm.SwitchState("MainMenu")
 
-	# gsm.GetActiveState().LoadLevel("end")
-
 	font = pygame.font.SysFont("Helvetica", 12)
 
 	## Main Loop
