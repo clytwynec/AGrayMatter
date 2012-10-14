@@ -27,9 +27,10 @@ class GS_End(GameState):
 		self.mGlowTime = 12000
 		self.mGlowSpeed = 2000
 
-		self.mStopTime = 21000
+		self.mStopTime = 24000
 
 		self.mScreechSound = self.mKernel.SoundManager().LoadSound("CarScreech.wav")
+		self.mScreechSound.set_volume(0.5)
 		self.mPlaying = False
 
 	def Initialize(self, levelName = ""):
@@ -49,6 +50,8 @@ class GS_End(GameState):
 
 		self.mOtherPlayer = Player(self.mKernel, self.mLevel)
 		self.mOtherPlayer.mMoveThrottle = 1
+		self.mOtherPlayer.mLeftImage, rect = self.mKernel.ImageManager().LoadImage("player_grey_left.bmp")
+		self.mOtherPlayer.mRightImage, rect = self.mKernel.ImageManager().LoadImage("player_grey_right.bmp")
 		self.mOtherPlayer.Reset()
 		self.mOtherPlayer.SetPosition([ 800, self.mOtherPlayer.mPosition[1] ])
 
@@ -95,7 +98,7 @@ class GS_End(GameState):
 			{ "time": 3810, "event": pygame.event.Event(2, { "key": 276 }) },
 			{ "time": 4312, "event": pygame.event.Event(3, { "key": 276 }) },
 			{ "time": 4712, "event": pygame.event.Event(2, { "key": 276 }) },
-			{ "time": 8202, "event": pygame.event.Event(3, { "key": 276 }) }
+			{ "time": 9202, "event": pygame.event.Event(3, { "key": 276 }) }
 		]
 
 	def HandlePlayerEvent(self, event):

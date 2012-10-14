@@ -43,7 +43,7 @@ class GameState:
 		return True
 
 	def Pause(self):
-		self.mActive = False
+		self.Destroy()
 
 		return True
 
