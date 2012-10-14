@@ -85,5 +85,4 @@ class MotorLevel(MaskedLevel):
 			self.mDialogueTriggered -= delta
 
 		if(self.mDoorTriggered >= 2):
-			self.mSound.play()
 			self.mDoor.LiftDoor()
