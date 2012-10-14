@@ -19,4 +19,4 @@ class DeathBox(Entity):
 	def Draw(self):
 		Entity.Draw(self)
 
-		pygame.draw.rect(self.mLevel.DisplaySurface(), Colors.YELLOW, self.mRect, 2)
+		# pygame.draw.rect(self.mLevel.DisplaySurface(), Colors.YELLOW, self.mRect, 2)
