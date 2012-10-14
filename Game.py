@@ -30,6 +30,7 @@ from GS_MainMenu import *
 from GS_MotorTransition import *
 from GS_DelayTransition import *
 from GS_EndTransition import *
+from GS_End import *
 
 
 
@@ -63,12 +64,13 @@ def main():
 	gsm.RegisterState(GS_EndTransition(kernel, gsm))
 	gsm.RegisterState(GS_AudioLevel(kernel, gsm))
 	gsm.RegisterState(GS_MotorLevel(kernel, gsm))
+	gsm.RegisterState(GS_End(kernel, gsm))
 
 	kernel.SetGameStateManager(gsm)
 
-	gsm.SwitchState("MainMenu")
+	gsm.SwitchState("End")
 
-	# gsm.GetActiveState().LoadLevel("motor")
+	# gsm.GetActiveState().LoadLevel("end")
 
 	font = pygame.font.SysFont("Helvetica", 12)
 
