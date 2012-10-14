@@ -22,6 +22,7 @@ from GameKernel import *
 from GameStateManager import *
 from GS_Game import *
 from GS_Editor import *
+from GS_DelayLevel import *
 
 
 #random.seed(0)
@@ -45,12 +46,13 @@ ticker = kernel.Ticker()
 gsm = GameStateManager()
 gsm.RegisterState(GS_Game(kernel, gsm))
 gsm.RegisterState(GS_Editor(kernel, gsm))
+gsm.RegisterState(GS_DelayLevel(kernel, gsm))
 
 kernel.SetGameStateManager(gsm)
 
-gsm.SwitchState("Game")
+gsm.SwitchState("DelayLevel")
 
-gsm.GetActiveState().LoadLevel("motor")
+gsm.GetActiveState().LoadLevel("audio")
 
 font = pygame.font.SysFont("Helvetica", 12)
 
