@@ -22,7 +22,7 @@ class MotorLevel(Level):
 		self.mCraneBox = CraneBox(self.mKernel, self)
 
 		self.mCraneSwitch.SetPosition([348,27])
-		self.mDoor.SetPosition([355,375])
+		self.mDoor.SetPosition([350,375])
 		self.mCraneBox.SetPosition([675,325])
 
 		self.mEntities.append(self.mCraneSwitch)
