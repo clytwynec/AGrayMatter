@@ -11,6 +11,7 @@ class MotorDoor(LevelChangeTrigger):
 		self.mRising = False
 
 		self.mImage, self.mRect = self.mKernel.ImageManager().LoadImage('tallDoor.bmp')
+		self.mCollisionRect = pygame.Rect(0, 0, 52, 71)
 
 	def LiftDoor(self):
 		self.mRising = True
