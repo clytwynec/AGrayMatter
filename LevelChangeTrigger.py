@@ -14,10 +14,7 @@ class LevelChangeTrigger(Entity):
 		self.mNewLevel = newLevelName
 
 	def Trigger(self, other):
-		self.mLevel.Unload()
-		self.mLevel.Load(self.mNewLevel)
-
-		self.mKernel.GameStateManager().GetActiveState().mPlayer.Reset()
+		self.mKernel.GameStateManager().SwitchState(self.mNewLevel)
 
 	def Draw(self):
 		Entity.Draw(self)

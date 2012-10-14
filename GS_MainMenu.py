@@ -38,6 +38,7 @@ class GS_MainMenu(GS_MenuBase):
 				self.mPlayer.Stop("left")
 			elif (event.key == K_RIGHT):
 				self.mPlayer.Stop("right")
+				
 		return GS_MenuBase.HandleEvent(self, event)
 
 	def Update(self, delta):
@@ -49,7 +50,7 @@ class GS_MainMenu(GS_MenuBase):
 		self.mLevel.Draw()
 		self.mPlayer.Draw()
 
-		self.m
+		self.mLevel.DisplaySurface().blit(self.mHeadingImage, self.mHeadingRect)
 
 		self.mLevel.Blit()
 
