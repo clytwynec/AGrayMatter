@@ -24,10 +24,13 @@ class GS_End(GameState):
 		self.mPlayerEvents = []
 		self.mOtherEvents = []
 
-		self.mGlowTime = 11000
+		self.mGlowTime = 12000
 		self.mGlowSpeed = 2000
 
-		self.mStopTime = 20000
+		self.mStopTime = 21000
+
+		self.mScreechSound = self.mKernel.SoundManager().LoadSound("CarScreech.wav")
+		self.mPlaying = False
 
 	def Initialize(self, levelName = ""):
 		GameState.Initialize(self)
@@ -163,6 +166,10 @@ class GS_End(GameState):
 			self.mOtherPlayer.Draw()
 
 		if (self.mTick >= self.mGlowTime):
+			if (not self.mPlaying):
+				self.mScreechSound.play()
+				self.mPlaying = True
+
 			if (self.mTick <= self.mGlowTime + self.mGlowSpeed):
 				alpha = 255 * float(self.mTick - self.mGlowTime) / float(self.mGlowSpeed)
 				self.mMaskSurf.set_alpha(alpha)

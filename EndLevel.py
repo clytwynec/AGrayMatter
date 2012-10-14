@@ -13,8 +13,8 @@ class EndLevel(MaskedLevel):
 		self.mMaskPosition = [400, 300]
 		self.mMask, self.mMaskRect = self.mKernel.ImageManager().LoadImage('end_mask.bmp', False)
 
-		self.mFadeStartTime = 13500
-		self.mFadeEndTime = 15000
+		self.mFadeStartTime = 17000
+		self.mFadeEndTime = 20000
 
 		self.mTime = 0
 
