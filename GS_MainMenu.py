@@ -1,52 +1,28 @@
-import pygame
-import os
-import math
-
-from GameState import *
+from GS_MenuBase import *
 from Player import *
-from Level import *
-from MaskedLevel import *
 from AudioLevel import *
-from MotorLevel import *
 
-from pygame.locals import *
-
-import Colors
-
-class GS_AudioLevel(GameState):
+class GS_MainMenu(GS_MenuBase):
 	def __init__(self, kernel, gsm):
-		GameState.__init__(self, "AudioLevel", kernel, gsm)
+		GS_MenuBase.__init__(self, "MainMenu", kernel, gsm)
 
-		self.mLevel = None
-		self.mPlayer = None
-
-	def Initialize(self, levelName = ""):
-		GameState.Initialize(self)
-
-		self.LoadLevel("audio")
-
-		return
-
-	def LoadLevel(self, levelName):
+		kernel.ImageManager().LoadImage("GrayMatter.bmp")
 		self.mLevel = AudioLevel(self.mKernel)
-		self.mLevel.Load(levelName)
-
 		self.mPlayer = Player(self.mKernel, self.mLevel)
-		self.mPlayer.Reset()
-		return
 
-	def Destroy(self):
-		return GameState.Destroy(self)
+		self.mLevel.mMaskPosition = [-100, -100]
 
-	def Pause(self):
-		return GameState.Pause(self)
+	def Initialize(self):
+		self.mLevel.Load("main_menu")
+
+		GS_MenuBase.Initialize(self)
 
 	def Unpause(self):
-		return GameState.Unpause(self)
+
+		GS_MenuBase.Unpause(self)
 
 
 	def HandleEvent(self, event):
-
 		if (event.type == KEYDOWN):
 			if (event.key == K_UP):
 				self.mPlayer.Jump()
@@ -62,11 +38,9 @@ class GS_AudioLevel(GameState):
 				self.mPlayer.Stop("left")
 			elif (event.key == K_RIGHT):
 				self.mPlayer.Stop("right")
-
-		return GameState.HandleEvent(self, event)
+		return GS_MenuBase.HandleEvent(self, event)
 
 	def Update(self, delta):
-
 		self.mPlayer.Update(delta)
 		self.mLevel.Update(delta)
 
@@ -76,7 +50,5 @@ class GS_AudioLevel(GameState):
 		self.mPlayer.Draw()
 
 		self.mLevel.Blit()
-		
-		self.mLevel.mMaskPosition = [-100, -100]
 
-		return GameState.Update(self, delta)
+		GS_MenuBase.Update(self, delta)

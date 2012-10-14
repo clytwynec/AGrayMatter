@@ -15,3 +15,4 @@ class CraneBox(Entity):
 
 	def Trigger(self, other):
 		self.mImage = self.mOnImage
+		self.mLevel.mDoorTriggered += 1
