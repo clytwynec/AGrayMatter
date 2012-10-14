@@ -28,7 +28,7 @@ class MotorLevel(MaskedLevel):
 
 
 		self.mDialogueFont = pygame.font.SysFont("Courier New", 24, True)
-		self.mDialogueSurface = None
+		self.mDialogueSurface = pygame.Surface((self.mDialogueTextRect.width, self.mDialogueTextRect.height)).convert()
 
 	def Load(self, levelName):
 		MaskedLevel.Load(self, levelName)
@@ -52,8 +52,23 @@ class MotorLevel(MaskedLevel):
 
 	def ShowDialogue(self):
 		if(self.mDialogueTriggered>0):
-			self.mLevelSurface.blit(self.mDialogueText, self.mDialogueTextRect)
-			self.mLevelSurface.blit(self.mDialogueMask, self.mDialogueMaskRect, None, BLEND_MULT)
+			alpha = None
+			self.mFadeTime = 1000
+			self.mFadeOutStartTime = 1000
+
+			self.mDialogueSurface.blit(self.mDialogueText, self.mDialogueTextRect)
+			self.mDialogueSurface.blit(self.mDialogueMask, self.mDialogueMaskRect, None, BLEND_MULT)
+
+
+			if (self.mDialogueTriggered>= 3500):
+				alpha = 255 * float(4500-self.mDialogueTriggered) / float(self.mFadeTime)
+			elif (self.mDialogueTriggered <= self.mFadeTime):
+				alpha = 255 * float(self.mDialogueTriggered) / float(self.mFadeTime)
+
+			if (alpha):
+				self.mDialogueSurface.set_alpha(alpha)
+				
+			self.mLevelSurface.blit(self.mDialogueSurface, self.mDialogueTextRect)
 
 	def Draw(self):
 		MaskedLevel.Draw(self)
