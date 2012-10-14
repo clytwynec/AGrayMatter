@@ -50,9 +50,9 @@ gsm.RegisterState(GS_DelayLevel(kernel, gsm))
 
 kernel.SetGameStateManager(gsm)
 
-gsm.SwitchState("DelayLevel")
+gsm.SwitchState("Game")
 
-gsm.GetActiveState().LoadLevel("timing")
+gsm.GetActiveState().LoadLevel("motor")
 
 font = pygame.font.SysFont("Helvetica", 12)
 
