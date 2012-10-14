@@ -1,7 +1,3 @@
-import pygame
-
-import Colors
-
 class Entity:
 	def __init__(self, kernel, level):
 		self.mKernel = kernel
@@ -24,9 +20,6 @@ class Entity:
 		self.mFrameWidth = 0
 		self.mAnimationSpeed = 1
 		self.mAnimationTick = 0
-
-		self.mDialogueFont = pygame.font.SysFont("Helvetica", 24, True)
-		self.mDialogueSurface = None
 
 	def Trigger(self, other):
 		return
@@ -75,16 +68,6 @@ class Entity:
 	def OnCollision(self, other):
 		return
 
-	def ShowDialogue(self, text):
-		dialogueText = self.mDialogueFont.render(text, True, Colors.BLACK, Colors.WHITE)
-		dialogueRect = dialogueText.get_rect()
-
-		self.mDialogueSurface = pygame.Surface((dialogueRect.width + 50, dialogueRect.height + 50))
-
-		self.mDialogueSurface.fill(Colors.WHITE)
-		pygame.draw.rect(self.mDialogueSurface, Colors.BLACK, (dialogueRect.width + 50, dialogueRect.height + 50), 10)
-		self.mDialogueSurface.blit(dialogueText, (50, 50, dialogueRect.width, dialogueText.height))
-
 
 	def Draw(self):
 		if (self.mImage):
@@ -93,6 +76,4 @@ class Entity:
 			else:
 				self.mLevel.DisplaySurface().blit(self.mImage, self.mRect)
 
-		if (self.mDialogueSurface):
-			self.mLevel.DisplaySurface().blit(self.mDialogueSurface, (400 - (self.mDialogueSurface.get_rect().width / 2), 50))
 		return
