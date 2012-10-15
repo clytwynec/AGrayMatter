@@ -14,7 +14,7 @@ import os
 import math
 import pygame
 import random 
-import pygame._view
+# import pygame._view
 
 from pygame.locals import *
 
@@ -48,6 +48,7 @@ import MotorDoor
 import MotorLevelChange
 import SafePoint
 import ScreechTrigger
+import CaveBlock
 
 #random.seed(0)
 

@@ -126,13 +126,6 @@ class Player(Entity):
 			if (abs(self.mVelocity[0] - 0) < 0.01):
 				self.mVelocity[0] = 0
 
-		self.mPosition[0] += self.mVelocity[0]
-
-		if (self.mPosition[0] < -20):
-			self.mPosition[0] = -20
-		elif (self.mPosition[0] > (800 - self.CollisionRect().width + 20)):
-			self.mPosition[0] = 800 - self.CollisionRect().width + 20
-
 		# Friction unless jumping
 
 		# Gravity only if Jumping
@@ -148,6 +141,14 @@ class Player(Entity):
 
 		self.CollideWorld()
 		self.CollideEntities()
+
+		# Horizontal Position and bounding
+		self.mPosition[0] += self.mVelocity[0]
+
+		if (self.mPosition[0] < -20):
+			self.mPosition[0] = -20
+		elif (self.mPosition[0] > (800 - self.CollisionRect().width + 20)):
+			self.mPosition[0] = 800 - self.CollisionRect().width + 20
 
 		if (self.mPosition[1] > 800):
 			self.Reset()
