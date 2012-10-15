@@ -145,7 +145,7 @@ class GS_End(GameState):
 		self.mTick += delta
 
 		if (self.mTick >= self.mStopTime):
-			self.mGameStateManager.SwitchState("MainMenu")
+			self.mGameStateManager.SwitchState("GameOverTransition")
 
 		for event in self.mPlayerEvents:
 			if (event["time"] <= self.mTick):

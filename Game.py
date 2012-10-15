@@ -31,6 +31,7 @@ from GS_MotorTransition import *
 from GS_DelayTransition import *
 from GS_EndTransition import *
 from GS_End import *
+from GS_GameOverTransition import *
 
 
 #random.seed(0)
@@ -64,10 +65,11 @@ def main():
 	gsm.RegisterState(GS_AudioLevel(kernel, gsm))
 	gsm.RegisterState(GS_MotorLevel(kernel, gsm))
 	gsm.RegisterState(GS_End(kernel, gsm))
+	gsm.RegisterState(GS_GameOverTransition(kernel, gsm))
 
 	kernel.SetGameStateManager(gsm)
 
-	gsm.SwitchState("DelayLevel")
+	gsm.SwitchState("GameOverTransition")
 
 	font = pygame.font.SysFont("Helvetica", 12)
 

@@ -27,8 +27,8 @@ class EndLevel(MaskedLevel):
 		if (self.mTime <= self.mFadeEndTime):
 			self.mMaskSurface.blit(self.mMask, self.mMaskRect)
 			self.mMaskSurface.blit(self.mPlayerMask, self.mPlayerRect, None, BLEND_ADD)
-		else:
-			self.mLevelSurface.fill(Colors.BLACK)
+		# else:
+		# 	self.mLevelSurface.fill(Colors.BLACK)
 				
 	def Draw(self):
 		Level.Draw(self)
@@ -37,12 +37,12 @@ class EndLevel(MaskedLevel):
 		self.mMaskSurface.blit(self.mPlayerMask, self.mPlayerRect, None, BLEND_ADD)
 
 	def Blit(self):
-		if (self.mTime <= self.mFadeEndTime):
-			if (self.mTime <= self.mFadeStartTime):
-				self.mLevelSurface.blit(self.mMaskSurface, self.mMaskSurface.get_rect(), None, BLEND_MULT)
-			else:
-				self.mLevelSurface.blit(self.mMaskSurface, self.mMaskSurface.get_rect(), None, BLEND_ADD)
+		# if (self.mTime <= self.mFadeEndTime):
+		if (self.mTime <= self.mFadeStartTime):
+			self.mLevelSurface.blit(self.mMaskSurface, self.mMaskSurface.get_rect(), None, BLEND_MULT)
 		else:
-			self.mLevelSurface.fill(Colors.BLACK)
+			self.mLevelSurface.blit(self.mMaskSurface, self.mMaskSurface.get_rect(), None, BLEND_ADD)
+		# else:
+			# self.mLevelSurface.fill(Colors.BLACK)
 
 		MaskedLevel.Blit(self)
