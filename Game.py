@@ -69,7 +69,7 @@ def main():
 
 	kernel.SetGameStateManager(gsm)
 
-	gsm.SwitchState("GameOverTransition")
+	gsm.SwitchState("MainMenu")
 
 	font = pygame.font.SysFont("Helvetica", 12)
 

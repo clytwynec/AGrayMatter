@@ -43,7 +43,6 @@ class GS_MotorLevel(GameState):
 	def Unpause(self):
 		return GameState.Unpause(self)
 
-
 	def HandleEvent(self, event):
 
 		if (event.type == KEYDOWN):

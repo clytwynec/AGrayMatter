@@ -7,7 +7,7 @@ Usage:
 
 from setuptools import setup
 
-APP = ['A Grey Matter.py']
+APP = ['AGrayMatter.py']
 DATA_FILES = []
 OPTIONS = {'argv_emulation': True, 'resources': "data",}
 

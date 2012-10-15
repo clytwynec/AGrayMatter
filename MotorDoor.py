@@ -30,5 +30,5 @@ class MotorDoor(LevelChangeTrigger):
 		if(self.mRising == True and self.mPosition[1]>375):
 			self.mPosition[1] -= 1
 
-		if(self.mPosition[1]<=375):
+		if(self.mPosition[1]<=375 ):
 			self.mLevel.mSound.fadeout(3000)
