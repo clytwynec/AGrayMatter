@@ -38,6 +38,7 @@ class GS_MotorLevel(GameState):
 		return GameState.Destroy(self)
 
 	def Pause(self):
+		self.mLevel.mSound.fadeout(500)
 		return GameState.Pause(self)
 
 	def Unpause(self):
