@@ -67,7 +67,7 @@ def main():
 
 	kernel.SetGameStateManager(gsm)
 
-	gsm.SwitchState("MotorLevel")
+	gsm.SwitchState("DelayLevel")
 
 	font = pygame.font.SysFont("Helvetica", 12)
 

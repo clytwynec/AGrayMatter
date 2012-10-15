@@ -13,4 +13,4 @@ class CaveBlock(Entity):
 
 	def OnCollision(self, other):
 		if (other.IsA("Player") and other.mVelocity[0] > 0):
-			other.mVelocity[0] = 0s
+			other.mVelocity[0] = 0
